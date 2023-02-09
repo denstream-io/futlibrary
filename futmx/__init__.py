@@ -11,6 +11,7 @@ from flask_login import LoginManager
 
 
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 # Constructor not initialized with application yet
 bcrypt = Bcrypt() 
@@ -26,6 +27,9 @@ def create_app(config_type):
     # Initilizing Application
     db.init_app(app)
     bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
+
 
     # Registering the blueprints
     from .views import home
@@ -34,8 +38,8 @@ def create_app(config_type):
     return app
 
 # Running App as a whole
-app = create_app('development')
+# app = create_app('development')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
     
