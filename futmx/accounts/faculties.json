@@ -1,0 +1,56 @@
+{
+    "SEET" : [
+        "Agriculture and Bio-resources Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Engineering",
+        "Electrical and Electronics Engineering",
+        "Mechanical Engineering",
+        "Mechatronics Engineering",
+        "Materials and Metallurgical Engineering",
+        "Telecommunication Engineering"
+    ],
+    "SAAT" : [
+        "Agricultural Economics and Extension Technology",
+        "Animal Production",
+        "Crop Production",
+        "Food Science and Technology",
+        "Soil Science and Land Management and Water Resources",
+        "Water Resources, Aquaculture and Fisheries Technology"
+    ],
+    "SET" : [
+        "Architecture",
+        "Building Technology",
+        "Estate Survey and Valuation",
+        "Quantity Surveying",
+        "Surveying and Geoinformatics",
+        "Urban and Regional Planning"
+    ],
+    "SICT" : [
+        "Computer Science",
+        "Cyber Security Science",
+        "Information and Media Technology",
+        "Library Information Technology"
+    ],
+    "SLS" : [
+        "Biological Science",
+        "Biochemistry",
+        "Microbiology"
+    ],
+    "SPS" : [
+        "Chemistry",
+        "Geography",
+        "Geology",
+        "Geophysics",
+        "Mathematics",
+        "Physics",
+        "Statistics"
+    ]
+    ,
+    "SSTE": [
+        "Industrial and Technology Education",
+        "Science Education",
+        "Educational Technology",
+        "Communication Education"
+    ]
+}
