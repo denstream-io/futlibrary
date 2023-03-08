@@ -3,7 +3,8 @@ from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from .models import User
+from .models import (User,)# FacultyDepartmentDropDown)
+from .utils import MultiCheckboxField
 
 
 class RegistrationForm(FlaskForm):
@@ -41,8 +42,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-################## HANDLING FORGET PASSWORD ##################
-
 class RequestResetForm(FlaskForm):
     """
     A form used for email reset
@@ -55,7 +54,6 @@ class RequestResetForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
             raise ValidationError('There is no account with that email. You must register first.')
-
 
 
 class ResetPasswordForm(FlaskForm):
@@ -73,8 +71,8 @@ class CourseSelectionForm(FlaskForm):
     for the app
     """
 
-    faculty = SelectField('Faculty')
-    department =SelectField('Department')
-    level = SelectField("Level", choices=['100lvl', '200lvl', '300lvl', '400lvl', '500lvl'])
-    courses = SelectMultipleField('Courses')
+    faculty = SelectField('Faculty', choices=[] )
+    department = SelectField('Department')
+    level = SelectField("Level", choices=['100lvl', '200lvl', '300lvl', '400lvl', '500lvl']) 
+    courses = MultiCheckboxField('Courses', choices = ['foo', 'bar', 'baz'])
 
