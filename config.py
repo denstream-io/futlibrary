@@ -3,7 +3,14 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__)) ## Use pathlib
 
 class Config():
+
+    # Flask-SQLAlchemy Config
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'c8f8b09584c19ad3957beb3d80983ba7'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+    # Flask-Mail Config
+    
     # MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.googlemail.com')
     # MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
     # MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in ['true', 'on', '1']
@@ -12,7 +19,10 @@ class Config():
     # FLASK_MAIL_SUBJECT_PREFIX = '[CleverB]'
     # FLASKY_MAIL_SENDER = ...
     # FLASK_ADMIN = os.environ.get('FLASK_ADMIN')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+
+    # Flask-Admin Config
+    FLASK_ADMIN_SWATCH = 'cerulean'
 
     @staticmethod
     def init_app(app):

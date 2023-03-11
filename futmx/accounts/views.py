@@ -3,7 +3,7 @@
 
 from flask import Blueprint, render_template, url_for, flash, redirect, request, abort
 from .forms import RegistrationForm, LoginForm, CourseSelectionForm
-from .models import (User, AcademicInfo,) # FacultyDepartmentDropDown)
+from .models import (User, AcademicInfo,)
 from flask_login import login_user, current_user, logout_user, login_required
 
 

@@ -5,6 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_admin import Admin
 
 #from .config import config
 
@@ -12,9 +13,9 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-
 # Constructor not initialized with application yet
 bcrypt = Bcrypt() 
+admin = Admin()
 
 def create_app(config_type):
     app = Flask(__name__)
@@ -30,7 +31,11 @@ def create_app(config_type):
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
-
+    admin.init_app(app)
+    admin.name = 'futlibrary'
+    admin.template_mode = 'bootstrap3'
+    from .admin import UserView
+    
     # Registering the blueprints
     from .accounts import views
     app.register_blueprint(views.home)

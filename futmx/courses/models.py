@@ -5,41 +5,45 @@ class Courses(db.Model):
 
     __tablename__ = "courses"
 
-    code = db.Column(db.String(64), unique=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(64), unique=True)
     name = db.Column(db.UnicodeText(1000), nullable=False)
-    lecturers = db.relationship('Lecturer', backref='post')
-    department = db.relationship('Department', backref='post')
     year = db.Column(db.String(10))
-    questions = db.relationship('Question', backref='post')
     unit = db.Column(db.String(10))
+    lecturers = db.relationship('Lecturer', backref='course') # backref adds a course attribute to other class models(imaginary)
+    department = db.relationship('Department', backref='course')
+    questions = db.relationship('Question', backref='course')
 
 
 class Lecturer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.UnicodeText(1000), nullable=False)
     position = db.Column(db.String(200))
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
 
     def __repr__(self):
-        return f'<Lecturer: "{self.name}...">'
+        return f'<{self.__class__.__name__}: "{self.name}...">'
 
 
 class Department(db.Model):
     name = db.Column(db.UnicodeText(1000), primary_key=True)
     faculty = db.Column(db.UnicodeText(1000))
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
 
     def __repr__(self):
-        return f'<Department: "{self.name}...">'
+        return f'<{self.__class__.__name__}: "{self.name}...">'
 
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    question_text = db.Column(db.UnicodeText(1000), nullable=False)
-    question_image_link = db.Column(db.Text)
     option_A = db.Column(db.String(200))
     option_B = db.Column(db.String(200))
     option_C = db.Column(db.String(200))
     option_D = db.Column(db.String(200))
     solution = db.Column(db.Text)
+    question_image_link = db.Column(db.Text)
+    question_text = db.Column(db.UnicodeText(1000), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
 
     def __repr__(self):
-        return f'<Question: "{self.question_text[0:20]}...">'
+        return f'<{self.__class__.__name__}: "{self.question_text[0:20]}...">'

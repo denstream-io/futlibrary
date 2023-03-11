@@ -23,8 +23,6 @@ class User(db.Model, UserMixin):
     send_email = db.Column(db.Boolean, nullable=False, default=False) # for opt in news letters
     email_confirmed = db.Column(db.Boolean, nullable=False, default=False) # for confirming legit emails
 
-    def __repr__(self):
-        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ')'
 
     @hybrid_property
     def password(self):
@@ -38,6 +36,9 @@ class User(db.Model, UserMixin):
         """Check password."""
         return bcrypt.check_password_hash(self.password, plaintext)
 
+    def __repr__(self):
+        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ')'
+
 
 class AcademicInfo(User):
 
@@ -49,3 +50,6 @@ class AcademicInfo(User):
     department = db.Column(db.String(64))
     level = db.Column(db.String(64))
     courses = db.Column(db.String(64))
+
+
+
