@@ -6,16 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_admin import Admin
-
-#from .config import config
-
+from flask_migrate import Migrate
 
 
+# Unintialized Constructors
 db = SQLAlchemy()
 login_manager = LoginManager()
-# Constructor not initialized with application yet
 bcrypt = Bcrypt() 
-admin = Admin()
+admin = Admin(name='futlibrary', template_mode='bootstrap3')
+migrate = Migrate()
 
 def create_app(config_type):
     app = Flask(__name__)
@@ -31,20 +30,14 @@ def create_app(config_type):
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
+    migrate.init_app(app, db)
     admin.init_app(app)
-    admin.name = 'futlibrary'
-    admin.template_mode = 'bootstrap3'
-    from .admin import UserView
+
     
     # Registering the blueprints
     from .accounts import views
+    from .admin import admin_bp
+    app.register_blueprint(admin_bp)
     app.register_blueprint(views.home)
 
     return app
-
-# Running App as a whole
-# app = create_app('development')
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-    

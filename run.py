@@ -2,10 +2,10 @@ from flask_migrate import Migrate
 
 from futmx import create_app, db
 from futmx.accounts.models import User
-from futmx.courses.models import Courses
+from futmx.courses.models import Courses, Department, Lecturer, Question
 
-app = create_app('development')
-migrate = Migrate(app, db)
+app = create_app("development")
+# migrate = Migrate(app, db)
 
 
 @app.shell_context_processor
@@ -16,8 +16,16 @@ def make_shell_ctx():
 
     Auto imports app models to shell for easy testing.
     """
-    return dict(app=app, db=db, User=User, Courses=Courses)
+    return dict(
+        app=app,
+        db=db,
+        User=User,
+        Courses=Courses,
+        Department=Department,
+        Lecturer=Lecturer,
+        Question=Question,
+    )
 
 
-if '__main__' == __name__:
+if "__main__" == __name__:
     app.run(debug=True)

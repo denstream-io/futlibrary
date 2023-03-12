@@ -14,6 +14,9 @@ class Courses(db.Model):
     department = db.relationship('Department', backref='course')
     questions = db.relationship('Question', backref='course')
 
+    def __repr__(self):
+        return f'<{self.__class__.__name__}: "{self.name}...">'
+
 
 class Lecturer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,10 +29,11 @@ class Lecturer(db.Model):
 
 
 class Department(db.Model):
-    name = db.Column(db.UnicodeText(1000), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.UnicodeText(1000))
     faculty = db.Column(db.UnicodeText(1000))
-    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
 
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     def __repr__(self):
         return f'<{self.__class__.__name__}: "{self.name}...">'
 
