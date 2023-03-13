@@ -35,9 +35,11 @@ def create_app(config_type):
 
     
     # Registering the blueprints
-    from .accounts import views
+    from .accounts import home_bp
     from .admin import admin_bp
+    from .courses import course_bp
     app.register_blueprint(admin_bp)
-    app.register_blueprint(views.home)
+    app.register_blueprint(home_bp)
+    app.register_blueprint(course_bp)
 
     return app

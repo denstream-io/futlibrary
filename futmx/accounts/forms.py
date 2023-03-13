@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
 #from flask_wtf.file import FileField, FileAllowed
-from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, SelectMultipleField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from .models import (User,)# FacultyDepartmentDropDown)
-from .utils import MultiCheckboxField
+from .models import User
+
 
 
 class RegistrationForm(FlaskForm):
@@ -65,14 +64,5 @@ class ResetPasswordForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
 
-class CourseSelectionForm(FlaskForm):
-    """
-    A form used for selecting offered courses
-    for the app
-    """
 
-    faculty = SelectField('Faculty', choices=[] )
-    department = SelectField('Department')
-    level = SelectField("Level", choices=['100lvl', '200lvl', '300lvl', '400lvl', '500lvl']) 
-    courses = MultiCheckboxField('Courses', choices = ['foo', 'bar', 'baz'])
 

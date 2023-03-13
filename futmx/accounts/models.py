@@ -3,13 +3,14 @@ from futmx import db, login_manager, bcrypt
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
+from ..courses.models import RegisterCourse
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(db.Model, UserMixin):
+class User(UserMixin, RegisterCourse):
     
     __tablename__ = 'users'
 
@@ -22,6 +23,9 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     send_email = db.Column(db.Boolean, nullable=False, default=False) # for opt in news letters
     email_confirmed = db.Column(db.Boolean, nullable=False, default=False) # for confirming legit emails
+    faculty = db.Column(db.String(64))
+    department = db.Column(db.String(64))
+    level = db.Column(db.String(64))
 
 
     @hybrid_property
@@ -37,19 +41,10 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password, plaintext)
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ')'
+        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ',' + self.faculty + ')'
 
 
-class AcademicInfo(User):
 
-    def __init__(self) -> None:
-        super().__init__()
-    
-
-    faculty = db.Column(db.String(64))
-    department = db.Column(db.String(64))
-    level = db.Column(db.String(64))
-    courses = db.Column(db.String(64))
 
 
 
