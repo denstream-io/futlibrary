@@ -1,6 +1,4 @@
 from futmx import db
-# from ..accounts.models import User
-from sqlalchemy.ext.declarative import declared_attr
 
 class Courses(db.Model):
 
@@ -15,10 +13,7 @@ class Courses(db.Model):
     lecturers = db.relationship('Lecturer', backref='course') 
     department = db.relationship('Department', backref='course')
     questions = db.relationship('Question', backref='course')
-
-    @declared_attr
-    def users_id(cls):
-        return db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f"<{self.__class__.__name__}: '{self.name}'>"
@@ -58,13 +53,3 @@ class Question(db.Model):
     def __repr__(self):
         return f"<{self.__class__.__name__}: '{self.id}'>"
 
-
-class RegisterCourse(db.Model):
-
-    # def __init__(self) -> None:
-    #     super().__init__()
-    __abstract__ = True
-    # courses = db.Column(db.String(64))
-    @declared_attr
-    def courses(cls):
-        return db.relationship('Courses', primaryjoin=lambda: cls.id == Courses.users_id, backref='user')

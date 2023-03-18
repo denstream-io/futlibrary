@@ -3,14 +3,14 @@ from futmx import db, login_manager, bcrypt
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
-from ..courses.models import RegisterCourse
+from ..courses.models import Courses
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(UserMixin, RegisterCourse):
+class User(db.Model, UserMixin):
     
     __tablename__ = 'users'
 
@@ -26,6 +26,7 @@ class User(UserMixin, RegisterCourse):
     faculty = db.Column(db.String(64))
     department = db.Column(db.String(64))
     level = db.Column(db.String(64))
+    courses = db.relationship('Courses', backref='course')
 
 
     @hybrid_property
