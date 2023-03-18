@@ -14,7 +14,8 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 bcrypt = Bcrypt() 
 admin = Admin(name='futlibrary', template_mode='bootstrap3')
-migrate = Migrate()
+
+migrate = Migrate() 
 
 def create_app(config_type):
     app = Flask(__name__)
@@ -29,7 +30,6 @@ def create_app(config_type):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'login'
-
     migrate.init_app(app, db)
     admin.init_app(app)
 

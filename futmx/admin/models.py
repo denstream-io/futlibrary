@@ -1,15 +1,16 @@
 from flask_admin.contrib.sqla import ModelView
 
 class UserView(ModelView):
-    # Setting user table constraints on admin
+    # Setting User table constraints on admin
     can_delete = False
     column_exclude_list = ['_password']
     column_display_pk = True
+    column_list = ['id','username', 'email', 'courses', 'faculty', 'department', 'level' ]
 
 class CoursesView(ModelView):
-    # column_hide_backrefs = False
+    # Setting Courses table constraints on admin
     can_delete = False
-    column_list = ['lecturers', 'department', 'questions']
+    column_list = ['id', 'code', 'name', 'year', 'unit', 'lecturers', 'department', 'questions']
 
 class DepartmentView(ModelView):
     ...

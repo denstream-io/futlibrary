@@ -5,8 +5,6 @@ from futmx.accounts.models import User
 from futmx.courses.models import Courses, Department, Lecturer, Question
 
 app = create_app("development")
-# migrate = Migrate(app, db)
-
 
 @app.shell_context_processor
 def make_shell_ctx():
