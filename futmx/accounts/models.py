@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password, plaintext)
 
     def __repr__(self):
-        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ',' + self.faculty + ')'
+        return self.__class__.__name__ + '(' + self.username + ',' + self.email + ')'
 
 
 
